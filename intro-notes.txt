@@ -1,0 +1,22 @@
+Goal:
+  - build a simple file-based content management system
+
+Process:
+  - read thru the Requirements
+
+    - think about WHAT the application needs to do in order to satisfy the requirements
+
+    - then, think about HOW the software will accomplish these things and what changes you need to make to it so that it can run
+
+  - once you have a PLAN, start making the changes
+    - make a plan first! every time!
+    - do not look at the given implementation steps before you have developed your own plan
+
+  - if solution is different from the given solution, be able to explain clearly HOW they are different and whether or not there will be any noticeable difference for the user
+
+
+  Implementation:
+    - create and store error message in the session if the requested file does not exist
+      - perhaps used File.exists? for this
+    - redirect the user back to the homepage
+    - add some code in our layout.erb or index.erb files that displays the error message and then deletes the message on page reload (if/else statement)
