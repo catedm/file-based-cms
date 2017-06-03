@@ -29,13 +29,21 @@ class CMSTest < Minitest::Test
   end
 
   def test_document_not_found
-    get "/notafile.exe"
+    get "/notafile.ext"
 
     assert_equal 302, last_response.status
 
     get last_response["Location"]
 
     assert_equal 200, last_response.status
-    assert_equal last_response.body, "notafile.exe does not exist."
+    assert_includes last_response.body, "notafile.ext does not exist"
+  end
+
+  def test_format_markdown
+    get "/about.md"
+
+    assert_equal 200, last_response.status
+    assert_equal "text/html;charset=utf-8", last_response["Content-Type"]
+    assert_includes last_response.body, "<li>First ordered list item</li>"
   end
 end

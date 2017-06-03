@@ -1,9 +1,16 @@
-You are an educated, successful person capable of abstract thought. A VP doing an SVP’s job. Your office, appointed with decent furniture and a healthy amount of natural light filtered through vertical blinds, is commensurate with nearly two decades of service to the craft of management.
+1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list.
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
 
-Copper plaques on the wall attest to your various leadership abilities inside and outside the organization: One, the Partner in Innovation Banquet Award 2011, is from the sales team for your support of its 18-month effort to reduce cycle friction—net sales increased 6.5 percent; another, the Civic Guidelight 2008, is for overseeing a volunteer team that repainted a troubled public school top to bottom.
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
 
-You have a reputation throughout the organization as a careful person, bordering on penny-pinching. The way you’d put it is, you are loath to pay for things that can’t be explained. You expect your staff to speak in plain language. This policy has served you well in many facets of operations, but it hasn’t worked at all when it comes to overseeing software development.
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
 
-For your entire working memory, some Internet thing has come along every two years and suddenly hundreds of thousands of dollars (inevitably millions) must be poured into amorphous projects with variable deadlines. Content management projects, customer relationship management integration projects, mobile apps, paperless office things, global enterprise resource planning initiatives—no matter how tightly you clutch the purse strings, software finds a way to pry open your fingers.
-
-Here we go again. On the other side of your (well-organized) desk sits this guy in his mid-30s with a computer in his lap. He’s wearing a taupe blazer. He’s come to discuss spending large sums to create intangible abstractions on a “website re-architecture project.” He needs money, support for his team, new hires, external resources. It’s preordained that you’ll give these things to him, because the CEO signed off on the initiative—and yet should it all go pear-shaped, you will be responsible. Coders are insanely expensive, and projects that start with uncomfortably large budgets have an ugly tendency to grow from there. You need to understand where the hours will go.
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
