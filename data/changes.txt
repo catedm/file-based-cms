@@ -4,7 +4,8 @@ We are here because the editor of this magazine asked me, “Can you tell me wha
 
 I began to program nearly 20 years ago, learning via oraperl, a special version of the Perl language modified to work with the Oracle database. A month into the work, I damaged the accounts of 30,000 fantasy basketball players. They sent some angry e-mails. After that, I decided to get better.
 
-Which is to say I’m not a natural. I love computers, but they never made any sense to me. And yet, after two decades of jamming information into my code-resistant brain, I’ve amassed enough knowledge that the computer has revealed itself. Its magic has been stripped away. I can talk to someone who used to work at Amazon.com or Microsoft about his or her work without feeling a burning shame. I’d happily talk to people from Google and Apple, too, but they so rarely reenter the general population.
+Changes
+
 
 The World Wide Web is what I know best (I’ve coded for money in the programming languages Java, JavaScript, Python, Perl, PHP, Clojure, and XSLT), but the Web is only one small part of the larger world of software development. There are 11 million professional software developers on earth, according to the research firm IDC. (An additional 7 million are hobbyists.) That’s roughly the population of the greater Los Angeles metro area. Imagine all of L.A. programming. East Hollywood would be for Mac programmers, West L.A. for mobile, Beverly Hills for finance programmers, and all of Orange County for Windows.
 

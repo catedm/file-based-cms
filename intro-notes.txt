@@ -16,7 +16,9 @@ Process:
 
 
   Implementation:
-    - create and store error message in the session if the requested file does not exist
-      - perhaps used File.exists? for this
-    - redirect the user back to the homepage
-    - add some code in our layout.erb or index.erb files that displays the error message and then deletes the message on page reload (if/else statement)
+  - add / create page and route for new document page
+  - build new document form on new document page
+  - redirect to index page post submit
+    - add message that says filename has been created
+  - build validation method for form names
+    - new documents must have a name

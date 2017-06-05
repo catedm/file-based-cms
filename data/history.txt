@@ -1,7 +1,1 @@
-You, using a pen and paper, can do anything a computer can; you just can’t do those things billions of times per second. And those billions of tiny operations add up. They can cause a phone to boop, elevate an elevator, or redirect a missile. That raw speed makes it possible to pull off not one but multiple sleights of hand, card tricks on top of card tricks. Take a bunch of pulses of light reflected from an optical disc, apply some math to unsqueeze them, and copy the resulting pile of expanded impulses into some memory cells—then read from those cells to paint light on the screen. Millions of pulses, 60 times a second. That’s how you make the rubes believe they’re watching a movie.
-
-Apple has always made computers; Microsoft used to make only software (and occasional accessory hardware, such as mice and keyboards), but now it’s in the hardware business, with Xbox game consoles, Surface tablets, and Lumia phones. Facebook assembles its own computers for its massive data centers.
-
-So many things are computers, or will be. That includes watches, cameras, air conditioners, cash registers, toilets, toys, airplanes, and movie projectors. Samsung makes computers that look like TVs, and Tesla makes computers with wheels and engines. Some things that aren’t yet computers—dental floss, flashlights—will fall eventually.
-
-When you “batch” process a thousand images in Photoshop or sum numbers in Excel, you’re programming, at least a little. When you use computers too much—which is to say a typical amount—they start to change you. I’ve had Photoshop dreams, Visio dreams, spreadsheet dreams, and Web browser dreams. The dreamscape becomes fluid and can be sorted and restructured. I’ve had programming dreams where I move text around the screen.
+new content
