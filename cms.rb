@@ -22,7 +22,7 @@ def load_file_content(file_path)
 
   case File.extname(file_path)
   when ".txt"
-    headers["Content-Type"] = "text/plain"
+    headers["Content-Type"] = "text/plain;charset=utf-8"
     content
   when ".md"
     erb render_markdown(content)
@@ -49,16 +49,22 @@ get "/new" do
 end
 
 post "/create" do
-  if params[:title] == ""
+  filename = params[:title].to_s
+
+  if filename.size == 0
     session[:message] = "A name is required."
+    status 422
     erb :new
-  elsif File.extname(params[:title]).empty?
+  elsif File.extname(filename).empty?
     session[:message] = "A file extension is required."
+    status 422
     erb :new
   else
-    new_document = File.new(params[:title], 'w')
-    FileUtils.move(new_document, root + '/data')
+    file_path = File.join(data_path, filename)
+
+    File.write(file_path, "")
     session[:message] = "#{params[:title]} was created."
+
     redirect "/"
   end
 end
@@ -89,5 +95,36 @@ post "/:filename" do
   File.write(file_path, params[:content])
 
   session[:message] = "#{params[:filename]} has been updated."
+  redirect "/"
+end
+
+post "/:filename/delete" do
+  file_path = File.join(data_path, params[:filename])
+
+  File.delete(file_path)
+
+  session[:message] = "#{params[:filename]} has been deleted."
+  redirect "/"
+end
+
+get "/users/signin" do
+  erb :signin
+end
+
+post "/users/signin" do
+  if params[:username] == "admin" && params[:password] == "secret"
+    session[:username] = params[:username]
+    session[:message] = "Welcome!"
+    redirect "/"
+  else
+    session[:message] = "Invalid Credentials."
+    status 422
+    erb :signin
+  end
+end
+
+post "/users/signout" do
+  session.delete(:username)
+  session[:message] = "You have been signed out."
   redirect "/"
 end

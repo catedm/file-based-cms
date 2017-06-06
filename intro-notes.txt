@@ -16,9 +16,12 @@ Process:
 
 
   Implementation:
-  - add / create page and route for new document page
-  - build new document form on new document page
-  - redirect to index page post submit
-    - add message that says filename has been created
-  - build validation method for form names
-    - new documents must have a name
+  - add sign in button to index page
+  - add view template for /users/signin
+  - add form with username and password fields and sign in button to /users/signin page
+  - code backend logic to deal with post request in the form
+    - username should reappear on redirect if incorrect username or password
+  - redirect the user to the homepage
+  - display welcome message
+  - add "signed in as username" and "sign out" button to index page
+  - code backend logic for post request submitted on "sign out" button click
