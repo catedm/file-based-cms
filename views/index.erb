@@ -6,11 +6,16 @@
       <form class="inline" method="post" action="/<%= file %>/delete">
         <button type="submit">Delete</button>
       </form>
+      <form class="inline" method="post" action="/<%= file %>/duplicate">
+        <button type="submit">Duplicate</button>
+      </form>
     </li>
     <% end %>
 </ul>
 
 <p><a href="new">New Document</a></p>
+<p><a href="imageupload">Upload Image</a></p>
+<p><a href="mediabank">Media Bank</a></p>
 
 <% if session[:username] %>
 <form method="post" action="users/signout">
@@ -21,4 +26,5 @@
 </form>
 <% else %>
   <p class="user-status"><a href="/users/signin">Sign in</a></p>
+  <p class="user-status"><a href="/users/signup">Sign up</a></p>
 <% end %>

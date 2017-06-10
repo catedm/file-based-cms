@@ -1,0 +1,11 @@
+Implementation notes:
+  - Add a Sign Up href to homepage
+  - add signup view
+  - add sign up form to signup view
+  - add route for sign up logic
+  - pass username and password into route
+  - check if username is already taken or not
+  - store username
+  - use bcrypt to encrypt and store pass
+  - add session message "Signed up successfully."
+  - redirect to "/" as new signed in user
