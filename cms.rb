@@ -19,12 +19,11 @@ def render_markdown(text)
   markdown.render(text)
 end
 
-def load_file_content(file_path)
-  content = File.read(file_path)
-
-  case File.extname(file_path)
+def load_file_content(path)
+  content = File.read(path)
+  case File.extname(path)
   when ".txt"
-    headers["Content-Type"] = "text/plain;charset=utf-8"
+    headers["Content-Type"] = "text/plain"
     content
   when ".md"
     erb render_markdown(content)
@@ -171,7 +170,7 @@ end
 
 get "/:filename" do
 
-  file_path = File.join(data_path, params[:filename])
+  file_path = File.join(data_path, File.basename(params[:filename]))
 
   if File.file?(file_path)
     load_file_content(file_path)
@@ -195,7 +194,7 @@ end
 def create_preserved_filename(filename)
   name, ext = filename.split(".")
   date, time, ignore  = Time.new.to_s.split(" ")
-  
+
   preserved_file_name = "#{name}-#{date}#{time}.#{ext}"
 end
 
