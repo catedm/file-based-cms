@@ -1,7 +1,14 @@
 <ul>
   <% @files.each do |image| %>
-  <li>
-    <a href="/media/<%= image %>"><%= image %></a>
-  </li>
+    <% if @img_types.include?(File.extname(image)) %>
+      <li>
+        <a href="<%= image %>"><%= image %></a> |
+        <form class="inline" method="post" action="/<%= image %>/delete_image">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% end %>
   <% end %>
 </ul>
+
+<p><a href="imageupload">Upload Image</a></p>

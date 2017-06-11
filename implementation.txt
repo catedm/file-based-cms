@@ -1,11 +1,6 @@
 Implementation notes:
-  - Add a Sign Up href to homepage
-  - add signup view
-  - add sign up form to signup view
-  - add route for sign up logic
-  - pass username and password into route
-  - check if username is already taken or not
-  - store username
-  - use bcrypt to encrypt and store pass
-  - add session message "Signed up successfully."
-  - redirect to "/" as new signed in user
+- add document archives link to the index
+- when a file is saved, edit the post route logic to save a copy before the changes are written to the file.
+  - save this file with the exact date/time appended
+  - write this file to an archives folder? (if sinatra will allow this)
+- list the archived files in the new archive view

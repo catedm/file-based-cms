@@ -39,6 +39,14 @@ def data_path
   end
 end
 
+def preserved_documents_data_path
+  File.expand_path("../preserveddocuments", __FILE__)
+end
+
+def image_data_path
+  File.expand_path("../public", __FILE__)
+end
+
 def signed_in?
   if session[:username]
     true
@@ -119,11 +127,18 @@ get "/imageupload" do
   erb :imageupload
 end
 
+get "/preserved-documents" do
+  signed_in?
+  @files = Dir.glob('preserveddocuments/*').map{ |file| File.basename(file) }
+
+  erb :preserveddocuments
+end
+
 post '/save_image' do
   @filename = params[:file][:filename]
   file = params[:file][:tempfile]
 
-  File.open("./media/#{@filename}", 'wb') do |f|
+  File.open("./public/#{@filename}", 'wb') do |f|
     f.write(file.read)
   end
 
@@ -131,16 +146,26 @@ post '/save_image' do
 end
 
 get "/mediabank" do
-  @files = Dir.glob('media/*').map{ |file| File.basename(file) }
+  @img_types = [".jpg", ".jpeg", ".ico", ".png"]
+  @files = Dir.glob('public/*').map{ |file| File.basename(file) }
 
   erb :mediabank
 end
 
-get '/media/:image' do
-  file = params[:image]
+get '/public/:image' do
+  @image = params[:image]
+  erb :viewimage
+end
 
-  File.open("./media/#{params[:image]}", 'wb') do |f|
-    f.write(file.read)
+get "/preserveddocuments/:filename" do
+
+  file_path = File.join(preserved_documents_data_path, params[:filename])
+
+  if File.file?(file_path)
+    load_file_content(file_path)
+  else
+    session[:message] = "#{params[:filename]} does not exist."
+    redirect "/"
   end
 end
 
@@ -167,14 +192,35 @@ get "/:filename/edit" do
   erb :edit
 end
 
+def create_preserved_filename(filename)
+  name, ext = filename.split(".")
+  date, time, ignore  = Time.new.to_s.split(" ")
+  
+  preserved_file_name = "#{name}-#{date}#{time}.#{ext}"
+end
+
 post "/:filename" do
   signed_in?
 
+  preserved_file_name = create_preserved_filename(params[:filename])
   file_path = File.join(data_path, params[:filename])
+  preserved_file_path = File.join(preserved_documents_data_path, preserved_file_name)
 
   File.write(file_path, params[:content])
+  File.write(preserved_file_path, params[:content])
 
   session[:message] = "#{params[:filename]} has been updated."
+  redirect "/"
+end
+
+post "/:image/delete_image" do
+  signed_in?
+
+  image_file_path = File.join(image_data_path, params[:image])
+
+  File.delete(image_file_path)
+
+  session[:message] = "#{params[:image]} has been deleted."
   redirect "/"
 end
 
@@ -182,7 +228,6 @@ post "/:filename/delete" do
   signed_in?
 
   file_path = File.join(data_path, params[:filename])
-
   File.delete(file_path)
 
   session[:message] = "#{params[:filename]} has been deleted."
@@ -223,9 +268,9 @@ post '/:filename/duplicate' do
   ext = File.extname(old_filename)
   base_filename = File.basename(old_filename, ext)
   copied_filename = base_filename + "_copy" + ext
-  new_file_path = File.join(data_path, content_to_copy)
+  new_file_path = File.join(data_path, copied_filename)
 
-  File.write(new_file_path, content)
+  File.write(new_file_path, content_to_copy)
 
   session[:message] = "#{params[:filename]} was duplicated."
   redirect "/"
