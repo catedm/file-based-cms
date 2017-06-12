@@ -39,21 +39,19 @@ def data_path
 end
 
 def preserved_documents_data_path
-  File.expand_path("../preserveddocuments", __FILE__)
+  File.expand_path("../preserved_documents", __FILE__)
 end
 
 def image_data_path
   File.expand_path("../public", __FILE__)
 end
 
-def signed_in?
-  if session[:username]
-    true
-  else
-    session[:message] = "You must be signed in to do that."
-    status 422
-    redirect "/"
-  end
+def signed_in
+  return if session[:username]
+
+  session[:message] = "You must be signed in to do that."
+  status 422
+  redirect "/"
 end
 
 def load_user_credentials
@@ -87,19 +85,18 @@ def add_user_to_database(username, password)
 end
 
 get "/" do
-  pattern = File.join(data_path, "*")
   @files = Dir.glob('data/*').map{ |file| File.basename(file) }
 
   erb :index
 end
 
 get "/new" do
-  signed_in?
+  signed_in
   erb :new
 end
 
 post "/create" do
-  signed_in?
+  signed_in
 
   filename = params[:title].to_s
 
@@ -122,15 +119,15 @@ post "/create" do
 end
 
 get "/imageupload" do
-  signed_in?
+  signed_in
   erb :imageupload
 end
 
 get "/preserved-documents" do
-  signed_in?
-  @files = Dir.glob('preserveddocuments/*').map{ |file| File.basename(file) }
+  signed_in
+  @files = Dir.glob('preserved_documents/*').map{ |file| File.basename(file) }
 
-  erb :preserveddocuments
+  erb :preserved_documents
 end
 
 post '/save_image' do
@@ -156,7 +153,7 @@ get '/public/:image' do
   erb :viewimage
 end
 
-get "/preserveddocuments/:filename" do
+get "/preserved_documents/:filename" do
 
   file_path = File.join(preserved_documents_data_path, params[:filename])
 
@@ -169,9 +166,7 @@ get "/preserveddocuments/:filename" do
 end
 
 get "/:filename" do
-
   file_path = File.join(data_path, File.basename(params[:filename]))
-
   if File.file?(file_path)
     load_file_content(file_path)
   else
@@ -181,7 +176,7 @@ get "/:filename" do
 end
 
 get "/:filename/edit" do
-  signed_in?
+  signed_in
 
   file_path = File.join(data_path, params[:filename])
 
@@ -192,14 +187,15 @@ get "/:filename/edit" do
 end
 
 def create_preserved_filename(filename)
-  name, ext = filename.split(".")
+  ext = File.extname(filename)
+  basename = File.basename(filename, ext)
   date, time, ignore  = Time.new.to_s.split(" ")
 
-  preserved_file_name = "#{name}-#{date}#{time}.#{ext}"
+  preserved_file_name = "#{basename}-#{date}#{time}.#{ext}"
 end
 
 post "/:filename" do
-  signed_in?
+  signed_in
 
   preserved_file_name = create_preserved_filename(params[:filename])
   file_path = File.join(data_path, params[:filename])
@@ -213,7 +209,7 @@ post "/:filename" do
 end
 
 post "/:image/delete_image" do
-  signed_in?
+  signed_in
 
   image_file_path = File.join(image_data_path, params[:image])
 
@@ -224,7 +220,7 @@ post "/:image/delete_image" do
 end
 
 post "/:filename/delete" do
-  signed_in?
+  signed_in
 
   file_path = File.join(data_path, params[:filename])
   File.delete(file_path)
@@ -258,7 +254,7 @@ post "/users/signout" do
 end
 
 post '/:filename/duplicate' do
-  signed_in?
+  signed_in
 
   old_filename = params[:filename].to_s
   old_file_path = File.join(data_path, old_filename)
